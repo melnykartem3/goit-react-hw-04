@@ -5,7 +5,6 @@ import SearchBar from './components/SearchBar/SearchBar';
 import Loader from './components/Loader/Loader';
 import ErrorMessage from './components/ErrorMessage/ErrorMessage';
 import LoadMoreBtn from './components/LoadMoreBtn/LoadMoreBtn';
-import toast, { Toaster } from 'react-hot-toast';
 import ImageModal from './components/ImageModal/ImageModal';
 
 export default function App() {
@@ -17,16 +16,6 @@ export default function App() {
   const [searched, setSearched] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
   const [modalIsOpen, setModalIsOpen] = useState(false);
-
-  const notify = () =>
-    toast('Fill in the field', {
-      duration: 4000,
-      position: 'top-right',
-      style: {
-        background: 'rgb(63, 160, 160)',
-        color: '#fff',
-      },
-    });
 
   const handleChange = event => {
     setQuery(event.target.value);
@@ -58,9 +47,7 @@ export default function App() {
   };
 
   const handleSearch = () => {
-    if (query.trim() === '') {
-      notify();
-    } else {
+    if (query.trim() !== '') {
       setImages([]);
       setSearched(true);
       setPage(1);
@@ -79,7 +66,6 @@ export default function App() {
 
   return (
     <>
-      <Toaster />
       <SearchBar
         query={query}
         setQuery={setQuery}
